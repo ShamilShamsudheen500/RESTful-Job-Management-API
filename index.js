@@ -1,0 +1,26 @@
+require('dotenv').config()
+const express =require('express')
+const cors = require('cors')
+const router = require('./router/router')
+require('./database/dbconnection')
+
+const app= express()
+
+app.use(cors())
+app.use(express.json())
+app.use(router)
+
+const PORT = 3000 || process.env.PORT
+
+
+app.listen(PORT,()=>{
+    console.log(`My appServer is running in port: ${PORT} and waiting for client request!!`);
+})
+
+app.get('/',(req,res)=>{
+    res.status(200).send('<h1 style="color:red;">My appServer is running in port and waiting for client req</h1>')
+})
+
+app.post('/',(req,res)=>{
+    res.status(200).send("POST REQUEST")
+})
